@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.loic.formationandroid.BonusActivity"
+    android:paddingTop="10dp">
+
+
+
+        <TextView android:text="A"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@color/material_deep_teal_500"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+            android:id="@+id/A"/>
+
+
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="D"
+        android:gravity="center"
+        android:background="#FF0000"
+        android:layout_below="@+id/A"
+        android:layout_centerInParent="true"/>
+
+
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="B"
+        android:gravity="center"
+        android:background="#FF0000"
+        android:layout_toRightOf="@+id/A"
+        android:layout_alignBottom="@id/A"
+        android:id="@+id/B"
+      />
+
+
+    <TextView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="C"
+        android:gravity="center"
+        android:background="#00FF00"
+        android:layout_above="@+id/B"
+        android:layout_alignParentRight="true"
+      />
+
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="E"
+        android:gravity="center"
+        android:background="#00FF00"
+        android:layout_toLeftOf="@id/A"
+        android:layout_marginRight="10dp"
+        />
+
+</RelativeLayout>
