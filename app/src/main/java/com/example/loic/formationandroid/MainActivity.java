@@ -1,5 +1,6 @@
 package com.example.loic.formationandroid;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -156,13 +157,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         @Override
         protected Boolean doInBackground(Void... params) {
             HttpClient client = new DefaultHttpClient();
-
-            HttpGet request = new HttpGet(new StringBuilder(URL)
+            String requestUrl = new StringBuilder(URL)
                     .append("/")
                     .append(username)
                     .append("/")
                     .append(password)
-                    .toString());
+                    .toString();
+
+            Log.i(TAG, requestUrl);
+            HttpGet request = new HttpGet(requestUrl);
 
             ObjectMapper mapper = new ObjectMapper();
 
@@ -171,7 +174,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 HttpResponse response = client.execute(request);
 
                 InputStream content = response.getEntity().getContent();
-
+                Log.i(TAG, "Response status: " + response.getStatusLine().getStatusCode());
                 jsonResponse = mapper.readValue(content, Response.class);
 
                 if (jsonResponse.getStatus() == HttpStatus.SC_OK) {
@@ -186,12 +189,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
 
         @Override
-        protected void onPostExecute(Boolean result) {
+        protected void onPostExecute(Boolean success) {
 
             progressBar.setVisibility(View.GONE);
 
             if (jsonResponse != null && jsonResponse.getMessage() != null) {
                 Toast.makeText(MainActivity.this, jsonResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                if(success) {
+                    // Création de l'intent qui va nous lancer la BonusActivity
+                    Intent intent = new Intent(MainActivity.this, BonusActivity.class);
+                    // Lancement de l'activité
+                    startActivity(intent);
+                }
             }
         }
 
